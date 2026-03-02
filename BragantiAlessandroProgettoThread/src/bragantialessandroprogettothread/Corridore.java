@@ -2,11 +2,6 @@ package bragantialessandroprogettothread;
 
 import java.util.Random;
 
-/*
- * CORRIDORE
- * Rappresenta un corridore che corre su un Thread separato.
- * Gestisce la logica della corsa: avanzamento, eventi casuali, arrivo.
- */
 public class Corridore implements Runnable {
 
     //attributi
