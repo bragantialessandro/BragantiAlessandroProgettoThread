@@ -14,14 +14,14 @@ public class FrmGara extends JFrame {
     private javax.swing.JComboBox<String> cmbLunghezza;
     private javax.swing.JButton           btnAggiungiCorridore;
     private javax.swing.JButton           btnAvviaGara;
-    private javax.swing.JButton           btnScommesse;
+    private javax.swing.JButton           btnScommesse;//apre form scommesse
     private javax.swing.JLabel            lblTimer;
-    private javax.swing.JPanel            pannelloControlli;
+    private javax.swing.JPanel            pannelloControlli;//contenitore per  tutta sta parte
     private javax.swing.JLabel            lblLunghezza;
 
     //corridori
-    private javax.swing.JPanel      pannelloBarre;
-    private javax.swing.JScrollPane scrollBarre;
+    private javax.swing.JPanel      pannelloBarre;//contiene corridori
+    private javax.swing.JScrollPane scrollBarre;//permette scrool se necessario
 
     //pannello madre scommesse e classifica
     private javax.swing.JPanel pannelloDestro;
@@ -29,8 +29,8 @@ public class FrmGara extends JFrame {
     //pannello classifica
     private javax.swing.JPanel        pannelloClassifica;
     private javax.swing.JLabel        lblTitoloClassifica;
-    private javax.swing.JSeparator    sepClass;
-    private javax.swing.JPanel        pannelloRigheClass;  // righe dinamiche
+    private javax.swing.JSeparator    sepClass;//separatore grafica sotto il titolo
+    private javax.swing.JPanel        pannelloRigheClass;//righe dinamiche
     private javax.swing.JScrollPane   scrollClass;
 
     //pannello scommesse
@@ -46,9 +46,9 @@ public class FrmGara extends JFrame {
     private javax.swing.JLabel lblStatSaldoIniziale, lblStatSaldoAttuale, lblStatGuadagno;
 
     //stats gare
-    private javax.swing.JLabel lblIntGare;
-    private javax.swing.JLabel lblEtGare, lblEtConScommessa, lblEtVittorie, lblEtSconfitte, lblEtPercentuale;
-    private javax.swing.JLabel lblStatGare, lblStatConScommessa, lblStatVittorie, lblStatSconfitte, lblStatPercentuale;
+    private javax.swing.JLabel lblIntGare;//intestazione gare
+    private javax.swing.JLabel lblEtGare, lblEtConScommessa, lblEtVittorie, lblEtSconfitte, lblEtPercentuale;//labels x statisriche
+    private javax.swing.JLabel lblStatGare, lblStatConScommessa, lblStatVittorie, lblStatSconfitte, lblStatPercentuale;//labels x statisriche dinamiche(gare fatte,% vittoria ecc)
 
     // Sezione Scommessa corrente
     private javax.swing.JLabel lblIntCorrente;
@@ -342,7 +342,7 @@ public class FrmGara extends JFrame {
     }
     // </editor-fold>
 
-    // Helpers per impostare label
+    //helpers per impostare label
     private void impostaEt(javax.swing.JLabel l, String t, java.awt.Font f, java.awt.Color c) {
         l.setText(t); l.setFont(f); l.setForeground(c);
     }
@@ -350,14 +350,14 @@ public class FrmGara extends JFrame {
         l.setText(t); l.setFont(f); l.setForeground(c);
         l.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     }
-    private javax.swing.GroupLayout.Group riga(javax.swing.GroupLayout gl,
+    private javax.swing.GroupLayout.Group riga(javax.swing.GroupLayout gl,//crea riga orizzontale
             javax.swing.JLabel et, javax.swing.JLabel val) {
         return gl.createSequentialGroup()
             .addComponent(et)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
             .addComponent(val);
     }
-    private javax.swing.GroupLayout.Group rigaV(javax.swing.GroupLayout gl,
+    private javax.swing.GroupLayout.Group rigaV(javax.swing.GroupLayout gl,//crea altezza riga
             javax.swing.JLabel et, javax.swing.JLabel val, int h) {
         return gl.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(et,  h, h, h)
@@ -372,9 +372,9 @@ public class FrmGara extends JFrame {
         avviaGara();//avvio gara
     }
     private void btnScommesseActionPerformed(java.awt.event.ActionEvent evt) {
-        new FrmScommesse(sistemaScommesse, nomiCorridori).setVisible(true);    //apre sezione scommesse,passa il sistema scommesse per azioni su saldo
+        new FrmScommesse(sistemaScommesse, nomiCorridori).setVisible(true);//apre sezione scommesse,passa il sistema scommesse per azioni su saldo
         SwingUtilities.invokeLater(new Runnable() {
-            public void run() { aggiornaStatistiche(); } //aggiorna i pannelli
+            public void run() { aggiornaStatistiche(); }//aggiorna i pannelli
         });
     }
 
@@ -430,7 +430,7 @@ public class FrmGara extends JFrame {
                 return new JLabel(new ImageIcon(sc));
             }
         }
-        JLabel seg = new JLabel("🏃", SwingConstants.CENTER);
+        JLabel seg = new JLabel("", SwingConstants.CENTER);
         seg.setOpaque(true);
         seg.setBackground(new Color(230, 230, 230));
         seg.setFont(new Font("SansSerif", Font.PLAIN, 32));
@@ -522,14 +522,14 @@ public class FrmGara extends JFrame {
 
         if (vincitore != null && sistemaScommesse.haVinto(vincitore.getNome())) {
             sistemaScommesse.accreditaVincita();
-            esito = "🎉 Hai vinto! +" + formattaEuro(sistemaScommesse.getVincitaPotenziale())
-                  + "\nSaldo: " + formattaEuro(sistemaScommesse.getSaldo());
+            esito = "🎉 hai vinto +" + formattaEuro(sistemaScommesse.getVincitaPotenziale())
+                  + "\nsaldo: " + formattaEuro(sistemaScommesse.getSaldo());
         } else if (avevaScommessa) {
             sistemaScommesse.registraSconfitta();
-            esito = "😞 Hai perso! -" + formattaEuro(sistemaScommesse.getImportoScommesso())
-                  + "\nSaldo: " + formattaEuro(sistemaScommesse.getSaldo());
+            esito = "😞 hai perso-" + formattaEuro(sistemaScommesse.getImportoScommesso())
+                  + "\nsaldo: " + formattaEuro(sistemaScommesse.getSaldo());
         } else {
-            esito = "Nessuna scommessa piazzata.";
+            esito = "nessuna scommessa piazzata";
         }
 
         sistemaScommesse.registraFineGara(avevaScommessa);
@@ -675,19 +675,19 @@ public class FrmGara extends JFrame {
         String statTesto;
         if (c.isArrivato())         statTesto = "✓";
         else if (c.isInvasione())   statTesto = "invasione";
-        else if (c.isFalsaPartenza()) statTesto = "falsa part.";
+        else if (c.isFalsaPartenza()) statTesto = "falsa partenza";
         else                         statTesto = c.getPercentuale() + "%";
 
         JLabel lblStat = new JLabel(statTesto);
         lblStat.setFont(new Font("SansSerif", Font.BOLD, 11));
         lblStat.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        // Separatore sotto ogni riga
+        //separatore sotto ogni riga
         riga.add(lblPos,  BorderLayout.WEST);
         riga.add(lblNome, BorderLayout.CENTER);
         riga.add(lblStat, BorderLayout.EAST);
 
-        // Bordo inferiore sottile
+        //bordo inferiore sottile
         riga.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 220, 200)),
             BorderFactory.createEmptyBorder(4, 4, 4, 6)

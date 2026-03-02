@@ -5,11 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
- * FRMCREACORRIDORE - finestra per aggiungere un corridore alla gara.
- * Solo grafica e controllo dell'input.
- * La logica di aggiunta sta in FrmGara.
- */
 public class FrmCreaCorridore extends JFrame {
 
     //attributi
@@ -35,10 +30,10 @@ public class FrmCreaCorridore extends JFrame {
 
         //layuot
         JPanel pannello = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 8, 8, 8);
-        gbc.fill   = GridBagConstraints.HORIZONTAL;
-
+        GridBagConstraints gbc = new GridBagConstraints();//tratta il pannello come una griglia
+        gbc.insets = new Insets(8, 8, 8, 8);//8px da ogni lato
+        gbc.fill   = GridBagConstraints.HORIZONTAL;//riempe orizzontalmente la sua cella
+        //gridx=colonna (x) & gridy=riga(y)
         gbc.gridx = 0; gbc.gridy = 0;
         pannello.add(new JLabel("nome:"), gbc);
         gbc.gridx = 1;
@@ -55,7 +50,7 @@ public class FrmCreaCorridore extends JFrame {
         pannello.add(btnAggiungi, gbc);
 
         add(pannello);
-        pack();
+        pack();//ridimensionamento a min necessario
 
         //eventi
         btnAnnulla.addActionListener(new ActionListener() {

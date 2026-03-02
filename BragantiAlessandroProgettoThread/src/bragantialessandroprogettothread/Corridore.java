@@ -70,8 +70,8 @@ public class Corridore implements Runnable {
 
     //testo da mostrare sulla barra di avanzamento
     public String getTestoBarra() {
-        if (falsaPartenza) return "❌ [" + pettorale + "] " + nome + " -falsa partenza";
-        if (invasione)     return "🚫 [" + pettorale + "] " + nome + " -nvasione di corsia";
+        if (falsaPartenza) return "❌ [" + pettorale + "] " + nome + " - falsa partenza";
+        if (invasione)     return "🚫 [" + pettorale + "] " + nome + " - nvasione di corsia";
         if (infortunato && !arrivato)
                            return "🤕 [" + pettorale + "] " + nome + " infortunato -" + getPercentuale() + "%";
         if (arrivato)      return "🏅 [" + pettorale + "] " + nome + " - " + posizione + "° posto!";
@@ -99,11 +99,11 @@ public class Corridore implements Runnable {
         }
 
         //eventi decisi prima
-        //invasione di corsia (3%)
-        boolean avraInvasione = dado.nextInt(100) < 3;
+        //invasione di corsia (7%)
+        boolean avraInvasione = dado.nextInt(100) < 7;
 
-        //scivolamento (6%)
-        boolean avraScivolata = !avraInvasione && dado.nextInt(100) < 6;
+        //scivolamento (8%)
+        boolean avraScivolata = !avraInvasione && dado.nextInt(100) < 8;
 
         //infortunio (5%)
         boolean avraInfortunio = !avraInvasione && !avraScivolata && dado.nextInt(100) < 5;
@@ -173,10 +173,10 @@ public class Corridore implements Runnable {
 
     @Override
     public String toString() {
-        if (falsaPartenza) return "[" + pettorale + "] " + nome + " — Falsa partenza";
-        if (invasione)     return "[" + pettorale + "] " + nome + " — Invasione di corsia";
+        if (falsaPartenza) return "[" + pettorale + "] " + nome + " — falsa partenza";
+        if (invasione)     return "[" + pettorale + "] " + nome + " — invasione di corsia";
         if (arrivato)      return "[" + pettorale + "] " + nome + " — " + posizione + "° posto";
-        if (infortunato)   return "[" + pettorale + "] " + nome + " — Infortunato (in gara)";
-        return "[" + pettorale + "] " + nome + " — In gara";
+        if (infortunato)   return "[" + pettorale + "] " + nome + " — infortunato";
+        return "[" + pettorale + "] " + nome + " - in gara";
     }
 }
